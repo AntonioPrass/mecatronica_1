@@ -1,1 +1,530 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ModuBotix Automation | Células Modulares & Robótica Integrada</title>
+  <style>
+    :root {
+      --orange: #FF5722;
+      --navy: #1A2B4C;
+      --bg-light: #F8F9FA;
+      --white: #FFFFFF;
+      --text-dark: #2D3748;
+      --text-muted: #6C757D;
+    }
 
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+      font-family: 'Segoe UI', system-ui, -apple-system, sans-serif;
+    }
+
+    body {
+      background-color: var(--bg-light);
+      color: var(--text-dark);
+      line-height: 1.6;
+    }
+
+    /* Layout & Utilities */
+    .container {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 1.5rem;
+    }
+
+    section {
+      padding: 5rem 0;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 0.85rem 1.75rem;
+      border-radius: 6px;
+      font-weight: 700;
+      text-decoration: none;
+      cursor: pointer;
+      transition: all 0.2s ease;
+      border: none;
+    }
+
+    .btn-primary {
+      background-color: var(--orange);
+      color: var(--white);
+    }
+
+    .btn-primary:hover {
+      background-color: #e04818;
+    }
+
+    .btn-secondary {
+      background-color: transparent;
+      color: var(--navy);
+      border: 2px solid var(--navy);
+    }
+
+    .btn-secondary:hover {
+      background-color: var(--navy);
+      color: var(--white);
+    }
+
+    .section-title {
+      font-size: 2.2rem;
+      color: var(--navy);
+      margin-bottom: 1rem;
+      text-align: center;
+    }
+
+    .section-subtitle {
+      text-align: center;
+      color: var(--text-muted);
+      max-width: 700px;
+      margin: 0 auto 3rem auto;
+    }
+
+    /* Header & Navigation */
+    header {
+      background-color: var(--white);
+      border-bottom: 1px solid #E2E8F0;
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+    }
+
+    .nav-container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      height: 80px;
+    }
+
+    .logo {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      text-decoration: none;
+    }
+
+    .logo-icon {
+      display: grid;
+      grid-template-columns: repeat(2, 12px);
+      gap: 3px;
+    }
+
+    .logo-block {
+      width: 12px;
+      height: 12px;
+      background-color: var(--orange);
+      border-radius: 2px;
+    }
+
+    .logo-block:nth-child(4) {
+      visibility: hidden;
+    }
+
+    .logo-text {
+      font-size: 1.4rem;
+      font-weight: 800;
+      color: var(--navy);
+    }
+
+    .logo-text span {
+      color: var(--navy);
+      font-weight: 400;
+      font-size: 1.1rem;
+      display: block;
+      margin-top: -6px;
+      letter-spacing: 1px;
+    }
+
+    nav ul {
+      display: flex;
+      list-style: none;
+      gap: 2rem;
+    }
+
+    nav a {
+      text-decoration: none;
+      color: var(--text-dark);
+      font-weight: 600;
+      transition: color 0.2s;
+    }
+
+    nav a:hover {
+      color: var(--orange);
+    }
+
+    /* Hero Section */
+    .hero {
+      background: linear-gradient(135deg, #1A2B4C 0%, #0F1A2E 100%);
+      color: var(--white);
+      padding: 6rem 0;
+      position: relative;
+    }
+
+    .hero-content {
+      max-width: 800px;
+      margin: 0 auto;
+      text-align: center;
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      line-height: 1.2;
+      margin-bottom: 1.5rem;
+    }
+
+    .hero p {
+      font-size: 1.25rem;
+      color: #CBD5E1;
+      margin-bottom: 2.5rem;
+    }
+
+    .hero-cta {
+      display: flex;
+      gap: 1rem;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    /* Quem Somos */
+    .about-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 3rem;
+      align-items: center;
+    }
+
+    .about-card {
+      background-color: var(--white);
+      padding: 2.5rem;
+      border-radius: 8px;
+      border-left: 5px solid var(--orange);
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.05);
+    }
+
+    .about-card h3 {
+      color: var(--navy);
+      margin-bottom: 1rem;
+    }
+
+    .culture-list {
+      list-style: none;
+      margin-top: 1rem;
+    }
+
+    .culture-list li {
+      margin-bottom: 0.75rem;
+      position: relative;
+      padding-left: 1.5rem;
+    }
+
+    .culture-list li::before {
+      content: "✓";
+      color: var(--orange);
+      font-weight: bold;
+      position: absolute;
+      left: 0;
+    }
+
+    /* Soluções / Serviços */
+    .solutions {
+      background-color: var(--white);
+    }
+
+    .grid-4 {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .service-card {
+      background-color: var(--bg-light);
+      padding: 2rem;
+      border-radius: 8px;
+      border: 1px solid #E2E8F0;
+      transition: transform 0.2s;
+    }
+
+    .service-card:hover {
+      transform: translateY(-5px);
+    }
+
+    .service-icon {
+      font-size: 2.5rem;
+      margin-bottom: 1rem;
+      display: block;
+    }
+
+    .service-card h3 {
+      color: var(--navy);
+      margin-bottom: 0.75rem;
+    }
+
+    /* Differentials */
+    .diff-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 2rem;
+    }
+
+    .diff-card {
+      background-color: var(--white);
+      padding: 2.5rem;
+      border-radius: 8px;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    }
+
+    .diff-card h3 {
+      color: var(--orange);
+      font-size: 1.5rem;
+      margin-bottom: 1rem;
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    /* Form Section */
+    .contact-section {
+      background-color: var(--navy);
+      color: var(--white);
+    }
+
+    .contact-wrapper {
+      max-width: 700px;
+      margin: 0 auto;
+      background-color: var(--white);
+      color: var(--text-dark);
+      padding: 3rem;
+      border-radius: 12px;
+    }
+
+    .contact-wrapper h2 {
+      color: var(--navy);
+      text-align: center;
+      margin-bottom: 2rem;
+    }
+
+    .form-group {
+      margin-bottom: 1.25rem;
+    }
+
+    .form-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 1rem;
+    }
+
+    label {
+      display: block;
+      font-weight: 600;
+      margin-bottom: 0.5rem;
+      font-size: 0.9rem;
+    }
+
+    input, select, textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid #CBD5E1;
+      border-radius: 6px;
+      font-size: 1rem;
+    }
+
+    input:focus, select:focus, textarea:focus {
+      outline: none;
+      border-color: var(--orange);
+    }
+
+    .btn-submit {
+      width: 100%;
+      margin-top: 1rem;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #0F1A2E;
+      color: #94A3B8;
+      text-align: center;
+      padding: 2rem 0;
+      font-size: 0.9rem;
+      border-top: 1px solid #1E293B;
+    }
+
+    /* Responsividade */
+    @media (max-width: 768px) {
+      .hero h1 { font-size: 2.2rem; }
+      .about-grid { grid-template-columns: 1fr; }
+      .form-row { grid-template-columns: 1fr; }
+      nav ul { display: none; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Header -->
+  <header>
+    <div class="container nav-container">
+      <a href="#" class="logo">
+        <div class="logo-icon">
+          <div class="logo-block"></div>
+          <div class="logo-block"></div>
+          <div class="logo-block"></div>
+          <div class="logo-block"></div>
+        </div>
+        <div class="logo-text">
+          ModuBotix
+          <span>AUTOMATION</span>
+        </div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="#quem-somos">Quem Somos</a></li>
+          <li><a href="#solucoes">Soluções</a></li>
+          <li><a href="#diferenciais">Diferenciais</a></li>
+          <li><a href="#contato">Contato</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Hero Section -->
+  <section class="hero">
+    <div class="container hero-content">
+      <h1>Automação Flexível no Ritmo da Sua Produção</h1>
+      <p>Células robóticas modulares de alto desempenho para manipulação precisa (Pick & Place) e integração instantânea à sua linha.</p>
+      <div class="hero-cta">
+        <a href="#contato" class="btn btn-primary">Solicite um Orçamento de Automação</a>
+        <a href="#solucoes" class="btn btn-secondary" style="color: white; border-color: white;">Ver Células em Ação</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- Quem Somos -->
+  <section id="quem-somos">
+    <div class="container">
+      <h2 class="section-title">Quem Somos</h2>
+      <p class="section-subtitle">Engenharia de alta precisão focada na democratização da automação avançada.</p>
+      
+      <div class="about-grid">
+        <div class="about-card">
+          <h3>Perfil da Empresa</h3>
+          <p>A ModuBotix Automation é uma startup de engenharia mecânica e mecatrônica dedicada a solucionar a rigidez das linhas industriais tradicionais através da modularidade e inteligência robótica.</p>
+        </div>
+        <div class="about-card">
+          <h3>Atitudes Empreendedoras</h3>
+          <ul class="culture-list">
+            <li>Agilidade no desenvolvimento de protótipos</li>
+            <li>Cultura Lean aplicada a cada projeto</li>
+            <li>Foco na redução drástica de downtime do cliente</li>
+            <li>Mentalidade de inovação contínua e adaptabilidade</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Soluções Mecatrônicas -->
+  <section id="solucoes" class="solutions">
+    <div class="container">
+      <h2 class="section-title">Soluções & Serviços Mecatrônicos</h2>
+      <p class="section-subtitle">Capacidades técnicas ponta a ponta para transformar sua fábrica em uma unidade inteligente.</p>
+
+      <div class="grid-4">
+        <div class="service-card">
+          <span class="service-icon">🖥️</span>
+          <h3>Projetos em CAD 3D</h3>
+          <p>Modelagem digital completa e simulação virtual antes da fabricação física, garantindo precisão e mitigando riscos.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">⚡</span>
+          <h3>Eletrônica Dedicada</h3>
+          <p>Painéis elétricos customizados, drivers de precisão e arquitetura de sensores industriais avançados.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">⚙️</span>
+          <h3>Programação de CLP e IHM</h3>
+          <p>Lógica de controle robusta (Ladder/Structured Text) para operação segura, intuitiva e sem complicações.</p>
+        </div>
+        <div class="service-card">
+          <span class="service-icon">👁️</span>
+          <h3>Visão Computacional</h3>
+          <p>Algoritmos avançados para localização e inspeção de peças em tempo real antes da manipulação (Pick & Place).</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Diferencial / Inovação -->
+  <section id="diferenciais">
+    <div class="container">
+      <h2 class="section-title">Diferencial & Inovação</h2>
+      <p class="section-subtitle">A união entre flexibilidade e alta performance para a Indústria 4.0.</p>
+
+      <div class="diff-grid">
+        <div class="diff-card">
+          <h3><span>🎯</span> Eliminação de Desperdícios</h3>
+          <p>Redução imediata de refugos de material, eliminação total dos gargalos de velocidade da operação manual e diminuição de até 70% dos custos com tempos mortos de setup.</p>
+        </div>
+        <div class="diff-card">
+          <h3><span>🚀</span> Eficiência 4.0</h3>
+          <p>Arquitetura plug-and-play reconfigurável em minutos. Monitoramento de dados em tempo real via IoT e algoritmos que se adaptam a diferentes formatos de peças sem parada de linha.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Formulário de Contato -->
+  <section id="contato" class="contact-section">
+    <div class="container">
+      <div class="contact-wrapper">
+        <h2>Traga sua Linha para a Era Modular</h2>
+        
+        <form onsubmit="event.preventDefault(); alert('Obrigado pelo contato! Nossos engenheiros retornarão em breve.');">
+          <div class="form-row">
+            <div class="form-group">
+              <label for="nome">Nome Completo</label>
+              <input type="text" id="nome" required placeholder="Seu nome">
+            </div>
+            <div class="form-group">
+              <label for="email">E-mail Corporativo</label>
+              <input type="email" id="email" required placeholder="nome@empresa.com">
+            </div>
+          </div>
+
+          <div class="form-row">
+            <div class="form-group">
+              <label for="empresa">Empresa</label>
+              <input type="text" id="empresa" required placeholder="Nome da empresa">
+            </div>
+            <div class="form-group">
+              <label for="cargo">Cargo</label>
+              <input type="text" id="cargo" placeholder="Ex: Gerente de Operações">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="ppm">Quantidade de Peças por Minuto (PPM) Desejada</label>
+            <input type="number" id="ppm" placeholder="Ex: 60">
+          </div>
+
+          <div class="form-group">
+            <label for="desafio">Descrição do Desafio de Automação</label>
+            <textarea id="desafio" rows="4" placeholder="Conte-nos sobre o produto, o processo de Pick & Place ou as limitações da linha atual..."></textarea>
+          </div>
+
+          <button type="submit" class="btn btn-primary btn-submit">Falar com um Engenheiro Especialista</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <div class="container">
+      <p>&copy; 2026 ModuBotix Automation. Todos os direitos reservados. Soluções em Células Modulares e Robótica Integrada.</p>
+    </div>
+  </footer>
+
+</body>
+</html>
